@@ -27,3 +27,15 @@ jobs:
         with:
           name: springboot-jar
           path: target/*.jar
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+
+    steps:
+      - name: Download jar
+        uses: actions/download-artifact@v4
+        with:
+          name: springboot-jar
+      - name: Check download file
+        run: ls -l
