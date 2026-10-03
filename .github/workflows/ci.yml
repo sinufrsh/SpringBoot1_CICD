@@ -64,14 +64,13 @@ jobs:
             "ls -lh /home/ubuntu/SpringBoot1-1.0.jar"
       - name: Stop old Spring Boot application
         run: |
-            ssh -o StrictHostKeyChecking=no \
+           ssh -o StrictHostKeyChecking=no \
             -i ~/.ssh/ec2_key \
             ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
-            "pkill -f 'SpringBoot1-1.0.jar' || true"
-
+            "echo Connected to EC2"
       - name: Start Spring Boot application
         run: |
-            ssh -o StrictHostKeyChecking=no \
+           ssh -o StrictHostKeyChecking=no \
             -i ~/.ssh/ec2_key \
             ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
             "java -jar /home/ubuntu/SpringBoot1-1.0.jar > /home/ubuntu/app.log 2>&1 &"
