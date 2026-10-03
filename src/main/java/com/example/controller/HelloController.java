@@ -8,6 +8,6 @@ public class HelloController {
 
 	@GetMapping("/hello")
 	public String hello() {
-	    return "Hello from version 3!";
+	    return "Hello from version 4!";
 	}
 }
