@@ -10,4 +10,9 @@ public class HelloController {
 	public String hello() {
 	    return "Hello from version 4 - Deployed by GitHub Actions!";
 	}
+	
+	@GetMapping("/new-api")
+	public String newApi() {
+	    return "New API deployed successfully using GitHub Actions + systemd!";
+	}
 }
