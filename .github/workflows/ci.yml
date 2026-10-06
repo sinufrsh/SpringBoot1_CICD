@@ -50,13 +50,6 @@ jobs:
             ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
             "whoami && hostname"
 
-      - name: Stop old Spring Boot application
-        run: |
-           ssh -o StrictHostKeyChecking=no \
-            -i ~/.ssh/ec2_key \
-            ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
-            "if [ -f /home/ubuntu/app.pid ]; then kill \$(cat /home/ubuntu/app.pid) 2>/dev/null || true; rm -f /home/ubuntu/app.pid; else echo 'No old application running'; fi"
-
       - name: Copy JAR to EC2
         run: |
            scp -o StrictHostKeyChecking=no \
@@ -71,9 +64,9 @@ jobs:
             ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
             "ls -lh /home/ubuntu/SpringBoot1-1.0.jar"
       
-      - name: Start Spring Boot application
+      - name: Restart Spring Boot application
         run: |
            ssh -o StrictHostKeyChecking=no \
             -i ~/.ssh/ec2_key \
             ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
-            "nohup java -jar /home/ubuntu/SpringBoot1-1.0.jar > /home/ubuntu/app.log 2>&1 & echo \$! > /home/ubuntu/app.pid"
+            "sudo systemctl restart springboot1"
