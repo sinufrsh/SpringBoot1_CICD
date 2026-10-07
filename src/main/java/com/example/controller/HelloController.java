@@ -15,4 +15,9 @@ public class HelloController {
 	public String newApi() {
 	    return "New API deployed successfully using GitHub Actions + systemd!";
 	}
+	
+	@GetMapping("/Eip")
+	public String ElasticIP() {
+	    return "checking throgh Elastic IP";
+	}
 }
